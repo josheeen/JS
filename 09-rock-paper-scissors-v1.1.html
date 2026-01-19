@@ -24,10 +24,12 @@
 
   <button onclick="
     resetScore();
-    alert(`Score has been reset.`)
+    document.querySelector('.js-score').innerHTML = `Score has been reset.`;
+    document.querySelector('.js-result').innerHTML = `<b>Play again.</b>`;
   ">Reset</button>
 
   <p class="js-score">Hello</p>
+  <p class="js-result">Results: </p>
 
   <script>
 
@@ -41,6 +43,7 @@
       tie: 0
     }
     
+
 
     // document.querySelector('.js-score').innerHTML = `Wins: ${score.wins}  Losses: ${score.lose}  Tie: ${score.tie}`;
     showScore()
@@ -90,7 +93,9 @@
       // console.log(typeof localStorage.getItem('score'))
 
 
-      alert(`You pick ${playerMove}. Comp pick ${compChoosenMove}. You ${result}.`);
+      // alert();
+
+      document.querySelector('.js-result').innerHTML = `You pick <b>${playerMove}</b>. Comp pick <b>${compChoosenMove}</b>. You <b>${result}</b>.`;
     
       showScore();
     }
