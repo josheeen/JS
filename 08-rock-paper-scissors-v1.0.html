@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+  <p>Rock Paper Scissors</p>
+
+  <button onclick="
+    playGame('Rock');
+    ">Rock</button>
+
+  <button onclick="
+    playGame('Paper');
+    ">Paper</button>
+
+  <button onclick="
+    playGame('Scissors');
+  ">Scissors</button>
+
+  <button onclick="
+    resetScore();
+    alert(`Wins: ${score.wins}  Losses: ${score.lose}  Tie: ${score.tie}`)
+  ">Reset</button>
+
+  <button onclick="
+    alert(`Wins: ${score.wins}  Losses: ${score.lose}  Tie: ${score.tie}`)
+  ">Show Scores</button>
+
+  <script>
+    //this check whether if there is a score that is stored in localStorage.
+    //We use the Default Operator ||
+    //If the left side is truthy, we run it, else use the right side or the default score. 
+    const score = JSON.parse(localStorage.getItem('score')) || {
+      wins: 0,
+      lose: 0,
+      tie: 0
+    }
+
+    function pickComputerMove() {
+      const compChoice = Math.random();
+      let compChoosenMove = '';
+
+      if (compChoice <= 1 / 3) {
+        compChoosenMove = 'Rock';
+      } else if (compChoice <= 2 / 3) {
+        compChoosenMove = 'Paper';
+      } else { compChoosenMove = 'Scissors' };
+
+      return compChoosenMove;
+    }
+
+    //Sets the score objects
+    function resetScore() {
+      score.wins = 0,
+      score.lose = 0,
+      score.tie = 0
+
+      localStorage.removeItem('score');
+    }
+
+    //Show game result, takes 2 parameters
+    function getResult(playerMove, computerMove) {
+
+      //This block of code checks if both of the player move and computer move is the same. Returns Tie
+      if (playerMove === computerMove) {
+        score.tie++;
+        return 'Tie';
+      }
+
+      if (
+        (playerMove === 'Rock' && computerMove === 'Scissors') ||
+        (playerMove === 'Paper' && computerMove === 'Rock') ||
+        (playerMove === 'Scissors' && computerMove === 'Paper')
+      ) {
+        score.wins++;
+        return 'Win';
+      }
+
+        score.lose++;
+        return 'Lose';
+      }
+
+    function playGame(playerMove) {
+      const compChoosenMove = pickComputerMove();
+      const result = getResult(playerMove, compChoosenMove);
+
+      localStorage.setItem('score', JSON.stringify(score));
+
+      alert(`You pick ${playerMove}. Comp pick ${compChoosenMove}. You ${result}.
+    Wins: ${score.wins}  Losses: ${score.lose}  Tie: ${score.tie}`);
+    }
+
+
+
+</script>
+</body>
+
+</html>

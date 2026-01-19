@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+</head>
+<body>
+  <p>Rock Paper Scissors</p>
+  <button onclick="
+    const compChoice = Math.random();
+    let compChoosenMove = '';
+    let result = '';
+
+    if(compChoice <= 0.3){
+      compChoosenMove = 'Rock';
+      result = 'Tie';
+    } else if(compChoice <= 0.6) {
+      compChoosenMove = 'Paper';
+      result = 'Loose';
+    } else {compChoosenMove = 'Scissors';
+      result = 'Win';
+    }
+    console.log(compChoosenMove)
+    console.log(compChoice);
+    alert(`You pick Rock, Comp pick ${compChoosenMove}. You ${result}`);
+  ">Rock</button>
+  <button onclick="
+    const compChoice = Math.random();
+    let compChoosenMove = '';
+    let result = '';
+
+    if(compChoice <= 0.3){
+      compChoosenMove = 'Rock';      
+    } else if(compChoice <= 0.6) {
+      compChoosenMove = 'Paper';
+    } else {compChoosenMove = 'Scissors'};
+
+    console.log(compChoosenMove)
+    console.log(compChoice);
+
+    if (compChoosenMove == 'Rock') {
+      result = 'Win'
+    } else if (compChoosenMove == 'Paper') {
+      result = 'Tie';
+    } else if (compChoosenMove == 'Scissors') {
+      result = 'Loose';
+    }
+    alert(`You pick Paper. Comp pick ${compChoosenMove}. You ${result}.`)
+  ">Paper</button>
+  <button onclick="
+    compChoice = Math.random();
+    compChoosenMove = '';
+    result = '';
+
+    if(compChoice <= 0.3){
+      compChoosenMove = 'Rock';
+    } else if(compChoice <= 0.6) {
+      compChoosenMove = 'Paper';
+    } else {compChoosenMove = 'Scissors'};
+
+    console.log(compChoosenMove)
+    console.log(compChoice);
+
+    if (compChoosenMove == 'Rock') {
+      result = 'Loose'
+    } else if (compChoosenMove == 'Paper') {
+      result = 'Win';
+    } else if (compChoosenMove == 'Scissors') {
+      result = 'Tie';
+    }
+    alert(`You pick Scissors. Comp pick ${compChoosenMove}. You ${result}.`)
+  ">Scissors</button>
+  <script>
+
+  </script>
+</body>
+</html>
