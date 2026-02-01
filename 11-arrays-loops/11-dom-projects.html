@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+  <style>
+    .subscribe-button {
+      font-weight: bold;
+      background-color: black;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+    }
+    .is-subscribed {
+      background-color: rgba(220, 207, 207, 0.69);
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <p>Youtube Subscribe Button</p>
+  <button class="js-subscribe-button subscribe-button"
+    onclick=" 
+      youtubeSubscribeButton();
+    "
+  >Subscribe</button>
+
+  <p>Rock Paper Scissors</p>
+  <a href="09-rock-paper-scissors-v1.1.html" target="_blank">Click here</a>
+
+  <p>Amazon Shipping Calculator</p>
+  <p>Orders under $40 = +$10 shipping.</p>
+  <p>Orders over $40 = FREE shipping.</p>
+  <input type="text" placeholder="Cost of order" class="js-cost" onkeydown="
+    //onkeydown is eventListener, mga pangyayari na nagaganap whenever you click the keyboard.
+    costKeyDown(event);
+  ">
+  <button class="js-cost-total" onclick="
+    amazonShipping();
+  ">Calculate</button>
+  <p class="js-total"></p>
+
+
+  <script>
+    
+    function youtubeSubscribeButton () {
+      let buttonElement = document.querySelector('.js-subscribe-button');
+      console.log(typeof buttonElement)
+      /*Ff are just another way to get this function running.*/
+
+      // if (buttonElement.innerHTML == 'Subscribe') {
+      //   buttonElement.innerHTML = 'Subscribed';
+      // }
+      // else (buttonElement.innerHTML = 'Subscribe');
+
+      //not a good practice since this is a statement, which performs action
+      // buttonElement.innerHTML == 'Subscribe' ? buttonElement.innerHTML = 'Subscribed': buttonElement.innerHTML = 'Subscribe' ;
+
+      //Use this instead. Ternary is mean to choose a value
+      // buttonElement.innerText =
+      // buttonElement.innerText === 'Subscribe' ? 'Subscribed' : 'Subscribe';
+      // if (buttonElement.innerText === 'Subscribed') {
+      //   buttonElement.classList.add('is-subscribed');
+      // } else {
+      //   buttonElement.classList.remove('is-subscribed');
+      // }
+
+      //boolean: checks if this is true
+      const isSubscribing = buttonElement.innerText === 'Subscribe';
+      console.log(typeof isSubscribing);
+      //if true, return Subscribed
+      buttonElement.innerText = isSubscribing? 'Subscribed' : 'Subscribe';
+      //if true, add a classname .is-subscribed
+      buttonElement.classList.toggle('is-subscribed', isSubscribing);
+    }
+
+    //Dito nag nag lagay ng parameter na event para pag ginamit etong function na eto, pwedeng gamitin yung built-in na event object as argument. Then meron ka nang access sa mga values nung event na object like dito sa example is we use the key value. LOLS
+    function costKeyDown(event) {
+      if (event.key === 'Enter') {
+      amazonShipping();
+    }
+    }
+    
+    function amazonShipping() {
+      let cost = Number(document.querySelector('.js-cost').value);
+      if (cost < 40) {
+        cost+=10;
+      }
+      document.querySelector('.js-total').innerHTML = `Total: $${cost}`;
+      
+      
+    }
+
+    
+
+  </script>
+
+</body>
+</html>
