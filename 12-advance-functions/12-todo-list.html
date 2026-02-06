@@ -9,15 +9,18 @@
 </head>
 
 <body>
+
   <p> <b>12</b> Todo List</p>
   <div class="todo-input-grid">
+    <!-- if enter keyboard is press -->
     <input placeholder="To do name" class="js-name-input name-input"
-      // if enter keyboard is press
       onkeydown="if (event.key === 'Enter') {
         addToDo();
       }"
     >
     <input type="date" class="js-date-input due-date-input">
+
+    <!-- instead of using onclick="" event listener inside HTML. use the addEventListener('click', function) in JS -->
     <button class="add-todo-button js-add-to-do-button">Add</button>
   </div>
 

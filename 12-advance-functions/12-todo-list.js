@@ -14,12 +14,12 @@ function renderTodoList() {
   todoList.forEach((todoObject, index) => {
     // const name = todoObject.name;
     // const dueDate = todoObject.dueDate;
-    //Instead of the variables sa taas, use this one sa baba. This is called Ohjects Destructuring
+    //Instead of the variables sa taas, use this one sa baba. This is called Objects Destructuring
     const { name, dueDate } = todoObject;
 
     const html = `
-      <div>${name}</div>
-      <div>${dueDate}</div>
+      <div>${capitalizeAndLowercaseRest(name)}</div>
+      <div>${dueDate || 'No due date!'}</div>
       <button onclick="
         todoList.splice(${index}, 1);
         renderTodoList();
@@ -28,26 +28,27 @@ function renderTodoList() {
 
     todoListHTML += html;
   })
+/*
+  this for loop is another way to write the forEach loop above. forEach loop is much preferred if we are looping in an array.
+  for (let i = 0; i < todoList.length; i++) {
+    const todoObject = todoList[i];
+    // const name = todoObject.name;
+    // const dueDate = todoObject.dueDate;
+    //Instead of the variables sa taas, use this one sa baba. This is called Ohjects Destructuring
+    const { name, dueDate } = todoObject;
 
-  //this for loop is another way to write the forEach loop above. forEach loop is much preferred if we are looping in an array.
-  // for (let i = 0; i < todoList.length; i++) {
-  //   const todoObject = todoList[i];
-  //   // const name = todoObject.name;
-  //   // const dueDate = todoObject.dueDate;
-  //   //Instead of the variables sa taas, use this one sa baba. This is called Ohjects Destructuring
-  //   const { name, dueDate } = todoObject;
+    const html = `
+      <div>${name}</div>
+      <div>${dueDate}</div>
+      <button onclick="
+        todoList.splice(${i}, 1);
+        renderTodoList();
+      " class="delete-todo-button">Delete</button>
+    `;
 
-  //   const html = `
-  //     <div>${name}</div>
-  //     <div>${dueDate}</div>
-  //     <button onclick="
-  //       todoList.splice(${i}, 1);
-  //       renderTodoList();
-  //     " class="delete-todo-button">Delete</button>
-  //   `;
-
-  //   todoListHTML += html;
-  // }
+    todoListHTML += html;
+  }
+*/
   console.log(todoListHTML);
   console.log(typeof todoListHTML)
 
@@ -63,6 +64,11 @@ function addToDo() {
   // get the value from the INPUT variable
   const name = inputElement.value;
   const dueDate = dateInputElement.value;
+
+  if (!name) {
+    alert('Please enter a todo name!')
+    return;
+  }
 
   //add the value or data that is entered into Object Array. 
   todoList.push({
@@ -83,3 +89,23 @@ function addToDo() {
 //instead of using onclick="" event listener inside HTML. use this one instead. 
 const addButtonElement = document.querySelector('.js-add-to-do-button');
 addButtonElement.addEventListener('click', addToDo)
+
+// const enterAddButtonElement = document.querySelector('.js-name-input');
+// enterAddButtonElement.addEventListener('keydown', (event) => {
+//   if (event.key === 'Enter') {
+//     addToDo();
+//   }
+// })
+
+
+function capitalizeAndLowercaseRest(string) {
+  // Check if the input is a valid string and not empty to prevent errors
+  if (typeof string !== 'string' || string.length === 0) {
+    return '';
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+// Example usage:
+const mixedCaseString = "jAVASCRIPT";
+console.log(capitalizeAndLowercaseRest(mixedCaseString)); // Output: "Javascript"
