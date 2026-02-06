@@ -28,7 +28,12 @@ let total = 0;
 const numsDoubled = [
 
 ]
-for (let i = 0; i < nums.length; i++) {
-  numsDoubled.push(nums[i] * 2);
-}
+// for (let i = 0; i < nums.length; i++) {
+//   numsDoubled.push(nums[i] * 2);
+// }
+// console.log(numsDoubled)
+
+nums.forEach((num, index) => {
+  numsDoubled.push(num * 2)
+})
 console.log(numsDoubled)

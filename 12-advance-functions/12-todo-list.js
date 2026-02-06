@@ -11,8 +11,7 @@ renderTodoList();
 function renderTodoList() {
   let todoListHTML = '';
 
-  for (let i = 0; i < todoList.length; i++) {
-    const todoObject = todoList[i];
+  todoList.forEach((todoObject, index) => {
     // const name = todoObject.name;
     // const dueDate = todoObject.dueDate;
     //Instead of the variables sa taas, use this one sa baba. This is called Ohjects Destructuring
@@ -22,13 +21,33 @@ function renderTodoList() {
       <div>${name}</div>
       <div>${dueDate}</div>
       <button onclick="
-        todoList.splice(${i}, 1);
+        todoList.splice(${index}, 1);
         renderTodoList();
       " class="delete-todo-button">Delete</button>
     `;
 
     todoListHTML += html;
-  }
+  })
+
+  //this for loop is another way to write the forEach loop above. forEach loop is much preferred if we are looping in an array.
+  // for (let i = 0; i < todoList.length; i++) {
+  //   const todoObject = todoList[i];
+  //   // const name = todoObject.name;
+  //   // const dueDate = todoObject.dueDate;
+  //   //Instead of the variables sa taas, use this one sa baba. This is called Ohjects Destructuring
+  //   const { name, dueDate } = todoObject;
+
+  //   const html = `
+  //     <div>${name}</div>
+  //     <div>${dueDate}</div>
+  //     <button onclick="
+  //       todoList.splice(${i}, 1);
+  //       renderTodoList();
+  //     " class="delete-todo-button">Delete</button>
+  //   `;
+
+  //   todoListHTML += html;
+  // }
   console.log(todoListHTML);
   console.log(typeof todoListHTML)
 
@@ -53,8 +72,14 @@ function addToDo() {
     name, dueDate
   });
 
-  //reset the text inside the INPUT table
+  //reset the text inside the INPUT and date box
   inputElement.value = '';
+  dateInputElement.value = '';
   console.log(todoList);
   renderTodoList();
 }
+
+
+//instead of using onclick="" event listener inside HTML. use this one instead. 
+const addButtonElement = document.querySelector('.js-add-to-do-button');
+addButtonElement.addEventListener('click', addToDo)
